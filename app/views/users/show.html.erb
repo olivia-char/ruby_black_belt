@@ -1,0 +1,11 @@
+<div class="container">
+	<a href="/users/<%= @user.id %>" data-method="delete">Logout</a> |
+	<a href="/bright_ideas">Bright Ideas</a>
+	<h4>Name: <%= @user.name%> </h4>
+	<h4>Alias: <%= @user.alias%> </h4>
+	<h4>Email: <%= @user.email%> </h4>
+	<hr>
+
+	<h4>Total Number of Posts: <%= @user.posts.count %></h4>
+	<h4>Total Number of Likes: <%= @user.likes.count%></h4>
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+	<a href="/users/<%= @user.id %>" data-method="delete">Logout</a>
+	<h1>Hi <%= @user.name %></h1>
+	<form action="/posts" method="post">
+		<div class="form-group">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+ 			<textarea class="form-control" placeholder="post something witty here" rows="4" id="post" name="post[content]"></textarea>
+ 			<button>Idea</button>
+		</div>
+	</form>
+
+	<% @posts.sort.each do |post| %>
+	
+		<h4><a href="/users/<%= post.user.id %>"><%= post.user.name %></a> says:</h4>
+		<p><%= post.content %></p>
+		<p><a href="/bright_ideas/<%= post.id %>"><%= post.likes.count%> people</a> like this</p>
+
+		<% if post.user != @user %>
+		<form action="/likes" method="post">
+		    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		    <input type="hidden" name="like[post_id]" value = "<%= post.id %>">
+			<button>Like</button>
+		</form>
+		<% end %>
+
+		<% if post.user == @user %>
+			<button><a href="/posts/<%= post.id %>" data-method="delete">Delete</a></button>
+	
+		<% end %>
+	<% end %>
+</div>
